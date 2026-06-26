@@ -1,0 +1,34 @@
+// config/env.ts — All env vars Zod-validated at startup, exported typed
+
+import { z } from "zod";
+
+const envSchema = z.object({
+  GEMINI_API_KEY: z.string().min(1, "GEMINI_API_KEY is required"),
+  CLERK_SECRET_KEY: z.string().min(1, "CLERK_SECRET_KEY is required"),
+  CLERK_PUBLISHABLE_KEY: z.string().min(1, "CLERK_PUBLISHABLE_KEY is required"),
+  RAZORPAY_KEY_ID: z.string().min(1, "RAZORPAY_KEY_ID is required"),
+  RAZORPAY_KEY_SECRET: z.string().min(1, "RAZORPAY_KEY_SECRET is required"),
+  RAZORPAY_WEBHOOK_SECRET: z.string().min(1, "RAZORPAY_WEBHOOK_SECRET is required"),
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1, "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY is required"),
+  NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
+});
+
+type Env = z.infer<typeof envSchema>;
+
+function validateEnv(): Env {
+  const parsed = envSchema.safeParse(process.env);
+
+  if (!parsed.success) {
+    const formatted = parsed.error.issues
+      .map((issue) => `  ✗ ${issue.path.join(".")}: ${issue.message}`)
+      .join("\n");
+
+    throw new Error(
+      `\n❌ Invalid environment variables:\n${formatted}\n\nPlease check your .env.local file.\n`
+    );
+  }
+
+  return parsed.data;
+}
+
+export const env: Env = validateEnv();
