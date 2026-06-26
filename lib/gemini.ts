@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { env } from "@/config/env";
 import { AppError } from "@/lib/errors";
 
-const GEMINI_MODEL = "gemini-2.0-flash" as const;
+const GEMINI_MODEL = "gemini-1.5-flash" as const;
 
 const MAX_OUTPUT_TOKENS = 8192;
 const DEFAULT_TEMPERATURE = 0.7;
