@@ -4,8 +4,10 @@
 
 import { useState } from "react";
 import { useAuth } from "@clerk/nextjs";
+import { toast } from "sonner";
 import { GeneratorForm } from "@/components/generator-form";
 import { PromptKitOutput } from "@/components/prompt-kit-output";
+import { GenerationLoader } from "@/components/generation-loader";
 import type { PromptKit, ProjectInput } from "@/features/generator/generator.types";
 
 interface ApiGenerateResponse {
@@ -31,10 +33,10 @@ export default function GeneratePage() {
       if (json.status === "success" && json.data) {
         setKit(json.data);
       } else {
-        alert(json.error ?? "Generation failed. Please try again.");
+        toast.error(json.error ?? "Generation failed. Please try again.");
       }
     } catch {
-      alert("Network error. Please check your connection and try again.");
+      toast.error("Network error. Check your connection.");
     } finally {
       setIsLoading(false);
     }
@@ -54,7 +56,11 @@ export default function GeneratePage() {
           </p>
         </div>
 
-        {kit === null ? (
+        {isLoading ? (
+          <div className="mx-auto w-full max-w-md">
+            <GenerationLoader />
+          </div>
+        ) : kit === null ? (
           /* Pre-generation: centered form */
           <div className="mx-auto max-w-2xl">
             <div className="rounded-2xl border border-[#E2D9CF] bg-white p-8 shadow-sm">
@@ -73,7 +79,7 @@ export default function GeneratePage() {
             </div>
 
             {/* Right: tabbed output */}
-            <div className="rounded-2xl border border-[#E2D9CF] bg-white p-6 shadow-sm">
+            <div className="animate-fade-in rounded-2xl border border-[#E2D9CF] bg-white p-6 shadow-sm">
               <div className="mb-5 flex items-center justify-between border-b border-[#E2D9CF] pb-4">
                 <h2 className="font-serif text-lg font-normal text-[#111111]">
                   {kit.projectName}

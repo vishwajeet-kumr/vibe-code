@@ -4,6 +4,7 @@
 
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import { toast } from "sonner";
 import { PricingCard } from "@/components/pricing-card";
 
 const FREE_FEATURES = [
@@ -34,7 +35,7 @@ export default function PricingPage() {
       router.push("/sign-in");
       return;
     }
-    alert("Checkout coming soon!");
+    toast.info("Checkout coming soon! We'll notify you when Pro launches.");
   }
 
   return (

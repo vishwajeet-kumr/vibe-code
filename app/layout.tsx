@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 import { Navbar } from "@/components/navbar";
 import "./globals.css";
 
@@ -45,6 +46,7 @@ export default function RootLayout({
         <body className="bg-[#F7F4F0]">
           <Navbar />
           {children}
+          <Toaster position="bottom-right" richColors />
         </body>
       </html>
     </ClerkProvider>
