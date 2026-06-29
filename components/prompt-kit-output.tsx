@@ -36,11 +36,11 @@ interface PromptKitOutputProps {
   readonly isAuthenticated: boolean;
 }
 
-const sectionClass = "rounded-xl border border-[#E2D9CF] bg-white p-5";
-const sectionTitleClass = "mb-2 text-[10px] font-semibold uppercase tracking-widest text-[#8C6A4A]";
-const proseClass = "whitespace-pre-wrap text-sm leading-relaxed text-[#111111]";
-const tagClass = "inline-flex rounded-md bg-[#EDE5DA] px-2 py-0.5 font-mono text-xs text-[#6B6457]";
-const depTagClass = "inline-flex rounded-md bg-[#EDE5DA] px-2 py-0.5 text-xs text-[#8C6A4A]";
+const sectionClass = "rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-5";
+const sectionTitleClass = "mb-2 text-[10px] font-semibold uppercase tracking-widest text-[var(--accent)]";
+const proseClass = "whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-primary)]";
+const tagClass = "inline-flex rounded-md bg-[var(--accent-light)] px-2 py-0.5 font-mono text-xs text-[var(--text-muted)]";
+const depTagClass = "inline-flex rounded-md bg-[var(--accent-light)] px-2 py-0.5 text-xs text-[var(--accent)]";
 
 function buildProjectMapText(kit: PromptKit): string {
   const header = `Overview:\n${kit.projectMap.overview}\n\nFile Structure:\n`;
@@ -71,7 +71,7 @@ function ProjectMapTab({ kit }: { kit: PromptKit }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-start justify-between gap-4">
-        <p className="text-sm leading-relaxed text-[#6B6457]">{kit.projectMap.overview}</p>
+        <p className="text-sm leading-relaxed text-[var(--text-muted)]">{kit.projectMap.overview}</p>
         <div className="ml-4 shrink-0">
           <CopyButton text={buildProjectMapText(kit)} />
         </div>
@@ -80,11 +80,11 @@ function ProjectMapTab({ kit }: { kit: PromptKit }) {
       <div className={sectionClass}>
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[#E2D9CF]">
-              <th className="pb-3 text-left text-xs font-semibold uppercase tracking-wider text-[#6B6457]">
+            <tr className="border-b border-[var(--border)]">
+              <th className="pb-3 text-left text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                 File Path
               </th>
-              <th className="pb-3 pl-6 text-left text-xs font-semibold uppercase tracking-wider text-[#6B6457]">
+              <th className="pb-3 pl-6 text-left text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                 Responsibility
               </th>
             </tr>
@@ -93,11 +93,11 @@ function ProjectMapTab({ kit }: { kit: PromptKit }) {
             {kit.projectMap.fileStructure.map((entry) => (
               <tr key={entry.filePath}>
                 <td className="py-2.5 pr-6">
-                  <code className="font-mono text-xs text-[#8C6A4A]">
+                  <code className="font-mono text-xs text-[var(--accent)]">
                     {entry.filePath}
                   </code>
                 </td>
-                <td className="py-2.5 pl-6 text-sm text-[#6B6457]">
+                <td className="py-2.5 pl-6 text-sm text-[var(--text-muted)]">
                   {entry.responsibility}
                 </td>
               </tr>
@@ -116,10 +116,10 @@ function BuildSequenceTab({ kit }: { kit: PromptKit }) {
         <div key={step.order} className={sectionClass}>
           <div className="mb-3 flex items-start justify-between gap-4">
             <div className="flex items-center gap-3">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#EDE5DA] text-xs font-bold text-[#8C6A4A]">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--accent-light)] text-xs font-bold text-[var(--accent)]">
                 {step.order}
               </span>
-              <h3 className="text-sm font-semibold text-[#111111]">{step.featureName}</h3>
+              <h3 className="text-sm font-semibold text-[var(--text-primary)]">{step.featureName}</h3>
             </div>
             <CopyButton text={step.prompt} />
           </div>
@@ -128,7 +128,7 @@ function BuildSequenceTab({ kit }: { kit: PromptKit }) {
 
           {step.filesToCreate.length > 0 && (
             <div className="mb-3">
-              <p className="mb-1.5 text-xs text-[#6B6457]">Files to create</p>
+              <p className="mb-1.5 text-xs text-[var(--text-muted)]">Files to create</p>
               <div className="flex flex-wrap gap-1.5">
                 {step.filesToCreate.map((f) => (
                   <span key={f} className={tagClass}>{f}</span>
@@ -139,7 +139,7 @@ function BuildSequenceTab({ kit }: { kit: PromptKit }) {
 
           {step.dependencies.length > 0 && (
             <div>
-              <p className="mb-1.5 text-xs text-[#6B6457]">Depends on</p>
+              <p className="mb-1.5 text-xs text-[var(--text-muted)]">Depends on</p>
               <div className="flex flex-wrap gap-1.5">
                 {step.dependencies.map((d) => (
                   <span key={d} className={depTagClass}>{d}</span>
@@ -158,8 +158,8 @@ function FollowUpsTab({ kit, isAuthenticated }: { kit: PromptKit; isAuthenticate
     <div className="flex flex-col gap-4">
       {Array.from({ length: 3 }).map((_, i) => (
         <div key={i} className={sectionClass}>
-          <div className="h-4 w-32 rounded bg-[#EDE5DA]" />
-          <div className="mt-3 h-16 w-full rounded bg-[#F7F4F0]" />
+          <div className="h-4 w-32 rounded bg-[var(--accent-light)]" />
+          <div className="mt-3 h-16 w-full rounded bg-[var(--bg)]" />
         </div>
       ))}
     </div>
@@ -168,9 +168,9 @@ function FollowUpsTab({ kit, isAuthenticated }: { kit: PromptKit; isAuthenticate
   return (
     <PaywallGate isLocked={!isAuthenticated}>
       {kit.followUpChain === null ? (
-        <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-[#E2D9CF] py-16 text-center">
+        <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-[var(--border)] py-16 text-center">
           <Zap size={22} className="text-[#E2D9CF]" />
-          <p className="text-sm text-[#6B6457]">Follow-up chain not generated yet.</p>
+          <p className="text-sm text-[var(--text-muted)]">Follow-up chain not generated yet.</p>
         </div>
       ) : (
         <div className="flex flex-col gap-4">
@@ -178,9 +178,9 @@ function FollowUpsTab({ kit, isAuthenticated }: { kit: PromptKit; isAuthenticate
             <div key={followUp.order} className={sectionClass}>
               <div className="mb-3 flex items-start justify-between gap-4">
                 <div>
-                  <span className="text-xs text-[#6B6457]">Step {followUp.order}</span>
-                  <h3 className="text-sm font-semibold text-[#111111]">{followUp.title}</h3>
-                  <p className="mt-0.5 text-xs text-[#6B6457]">{followUp.purpose}</p>
+                  <span className="text-xs text-[var(--text-muted)]">Step {followUp.order}</span>
+                  <h3 className="text-sm font-semibold text-[var(--text-primary)]">{followUp.title}</h3>
+                  <p className="mt-0.5 text-xs text-[var(--text-muted)]">{followUp.purpose}</p>
                 </div>
                 <CopyButton text={followUp.prompt} />
               </div>
@@ -200,7 +200,7 @@ export function PromptKitOutput({ kit, isAuthenticated }: PromptKitOutputProps) 
   return (
     <div className="flex flex-col">
       {/* Tab bar */}
-      <div className="flex border-b border-[#E2D9CF] bg-white">
+      <div className="flex border-b border-[var(--border)] bg-[var(--bg-card)]">
         {TABS.map((tab) => {
           const isActive = tab.id === activeTab;
           return (
@@ -209,8 +209,8 @@ export function PromptKitOutput({ kit, isAuthenticated }: PromptKitOutputProps) 
               onClick={() => setActiveTab(tab.id)}
               className={`inline-flex items-center gap-1.5 px-4 py-3 text-sm font-medium transition-colors duration-150 ${
                 isActive
-                  ? "border-b-2 border-[#8C6A4A] text-[#8C6A4A]"
-                  : "border-b-2 border-transparent text-[#6B6457] hover:text-[#111111]"
+                  ? "border-b-2 border-[var(--accent)] text-[var(--accent)]"
+                  : "border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-primary)]"
               }`}
             >
               {tab.icon}

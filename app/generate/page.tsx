@@ -20,10 +20,10 @@ const CACHE_KEY = "promptra_cached_kit";
 function PageHeading() {
   return (
     <div className="mb-10 text-center">
-      <h1 className="font-serif text-4xl font-normal tracking-tight text-[#111111] sm:text-5xl">
-        Generate Your <span className="italic text-[#8C6A4A]">Prompt Kit</span>
+      <h1 className="font-serif text-4xl font-normal tracking-tight text-[var(--text-primary)] sm:text-5xl">
+        Generate Your <span className="italic text-[var(--accent)]">Prompt Kit</span>
       </h1>
-      <p className="mt-3 text-base text-[#6B6457]">
+      <p className="mt-3 text-base text-[var(--text-muted)]">
         Describe your project and get a complete vibe coding prompt kit instantly.
       </p>
     </div>
@@ -41,14 +41,14 @@ interface PostGenerationProps {
 function PostGenerationView({ kit, userId, isLoading, onClear, onSubmit }: PostGenerationProps) {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[360px_1fr]">
-      <div className="h-fit rounded-2xl border border-[#E2D9CF] bg-white p-6 shadow-sm">
+      <div className="h-fit rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#6B6457]">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)]">
             Regenerate
           </p>
           <button
             onClick={onClear}
-            className="text-xs font-medium text-[#8C6A4A] transition-colors hover:text-[#111111] hover:underline"
+            className="text-xs font-medium text-[var(--accent)] transition-colors hover:text-[var(--text-primary)] hover:underline"
           >
             Clear
           </button>
@@ -56,13 +56,13 @@ function PostGenerationView({ kit, userId, isLoading, onClear, onSubmit }: PostG
         <GeneratorForm onSubmit={onSubmit} isLoading={isLoading} />
       </div>
 
-      <div className="animate-fade-in rounded-2xl border border-[#E2D9CF] bg-white p-6 shadow-sm">
-        <div className="mb-5 flex items-center justify-between border-b border-[#E2D9CF] pb-4">
+      <div className="animate-fade-in rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 shadow-sm">
+        <div className="mb-5 flex items-center justify-between border-b border-[var(--border)] pb-4">
           <div className="flex items-center gap-3">
-            <h2 className="font-serif text-lg font-normal text-[#111111]">
+            <h2 className="font-serif text-lg font-normal text-[var(--text-primary)]">
               {kit.projectName}
             </h2>
-            <span className="rounded-full bg-[#EDE5DA] px-3 py-0.5 text-xs font-medium text-[#8C6A4A]">
+            <span className="rounded-full bg-[var(--accent-light)] px-3 py-0.5 text-xs font-medium text-[var(--accent)]">
               {kit.projectType}
             </span>
           </div>
@@ -118,7 +118,7 @@ export default function GeneratePage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#F7F4F0]">
+    <main className="min-h-screen bg-[var(--bg)]">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <PageHeading />
         {isLoading ? (
@@ -127,7 +127,7 @@ export default function GeneratePage() {
           </div>
         ) : kit === null ? (
           <div className="mx-auto max-w-2xl">
-            <div className="rounded-2xl border border-[#E2D9CF] bg-white p-8 shadow-sm">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 shadow-sm">
               <GeneratorForm onSubmit={handleSubmit} isLoading={isLoading} />
             </div>
           </div>

@@ -42,11 +42,11 @@ export function GenerationLoader() {
   }, []);
 
   return (
-    <div className="mx-auto w-full max-w-md rounded-2xl border border-[#E2D9CF] bg-white p-8 shadow-sm">
-      <h2 className="mb-1 font-serif text-2xl font-normal text-[#111111]">
+    <div className="mx-auto w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 shadow-sm">
+      <h2 className="mb-1 font-serif text-2xl font-normal text-[var(--text-primary)]">
         Building your prompt kit
       </h2>
-      <p className="mb-8 text-sm text-[#6B6457]">
+      <p className="mb-8 text-sm text-[var(--text-muted)]">
         This takes about 30 seconds. Sit tight.
       </p>
 
@@ -59,13 +59,13 @@ export function GenerationLoader() {
           return (
             <div key={step.id} className="flex items-center gap-3">
               <div className="flex h-5 w-5 shrink-0 items-center justify-center">
-                {isDone && <Check className="h-4 w-4 text-[#8C6A4A]" strokeWidth={3} />}
-                {isActive && <Loader2 className="h-4 w-4 animate-spin text-[#8C6A4A]" />}
-                {isPending && <div className="h-2 w-2 rounded-full border border-[#E2D9CF]" />}
+                {isDone && <Check className="h-4 w-4 text-[var(--accent)]" strokeWidth={3} />}
+                {isActive && <Loader2 className="h-4 w-4 animate-spin text-[var(--accent)]" />}
+                {isPending && <div className="h-2 w-2 rounded-full border border-[var(--border)]" />}
               </div>
               <span
                 className={`text-sm ${
-                  isDone || isActive ? "font-medium text-[#8C6A4A]" : "text-[#6B6457]/50"
+                  isDone || isActive ? "font-medium text-[var(--accent)]" : "text-[var(--text-muted)]/50"
                 }`}
               >
                 {step.text}
@@ -76,9 +76,9 @@ export function GenerationLoader() {
         })}
       </div>
 
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#EDE5DA]/50">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--accent-light)]/50">
         <div
-          className="h-full bg-[#8C6A4A]"
+          className="h-full bg-[var(--accent)]"
           style={{ width: `${progress}%`, transition: "width 30s linear" }}
         />
       </div>

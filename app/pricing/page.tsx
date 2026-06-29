@@ -39,16 +39,16 @@ export default function PricingPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#F7F4F0] px-4 py-20 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[var(--bg)] px-4 py-20 sm:px-6 lg:px-8">
       <div className="relative mx-auto max-w-4xl">
         {/* Heading */}
         <div className="mb-14 text-center">
-          <h1 className="font-serif text-5xl font-normal tracking-tight text-[#111111] sm:text-6xl">
+          <h1 className="font-serif text-5xl font-normal tracking-tight text-[var(--text-primary)] sm:text-6xl">
             Simple,{" "}
-            <span className="italic text-[#8C6A4A]">Honest</span>{" "}
+            <span className="italic text-[var(--accent)]">Honest</span>{" "}
             Pricing
           </h1>
-          <p className="mt-4 text-base text-[#6B6457]">
+          <p className="mt-4 text-base text-[var(--text-muted)]">
             Start free. Upgrade when you need more firepower.
           </p>
         </div>
@@ -76,7 +76,7 @@ export default function PricingPage() {
         </div>
 
         {/* Footer note */}
-        <p className="mt-10 text-center text-sm text-[#6B6457]">
+        <p className="mt-10 text-center text-sm text-[var(--text-muted)]">
           All prices in INR · Cancel anytime · No hidden fees
         </p>
       </div>

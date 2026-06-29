@@ -41,9 +41,23 @@ export default function RootLayout({
     <ClerkProvider>
       <html
         lang="en"
+        suppressHydrationWarning
         className={`${inter.variable} ${instrumentSerif.variable} ${jetBrainsMono.variable} h-full antialiased`}
       >
-        <body className="bg-[#F7F4F0]">
+        <head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+    (function() {
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.classList.toggle('dark', 
+        theme === 'dark');
+    })();
+  `
+            }}
+          />
+        </head>
+        <body className="bg-[var(--bg)]">
           <Navbar />
           {children}
           <Toaster position="bottom-right" richColors />

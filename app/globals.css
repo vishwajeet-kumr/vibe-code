@@ -1,21 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F7F4F0;
-  --foreground: #111111;
+  --bg: #F7F4F0;
+  --bg-card: #FFFFFF;
+  --text-primary: #111111;
+  --text-muted: #6B6457;
+  --accent: #8C6A4A;
+  --accent-light: #EDE5DA;
+  --border: #E2D9CF;
+}
+
+.dark {
+  --bg: #0F0F0D;
+  --bg-card: #1A1917;
+  --text-primary: #F5F0EB;
+  --text-muted: #9A8F83;
+  --accent: #C4956A;
+  --accent-light: #2A2420;
+  --border: #2E2B27;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg);
+  --color-foreground: var(--text-primary);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-instrument-serif);
   --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--text-primary);
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -40,4 +55,23 @@ body {
 
 .animate-fade-in {
   animation: fadeIn 400ms ease-in-out forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 600ms ease-out forwards;
+}
+
+.animate-fade-up-delay-100 {
+  animation: fadeUp 600ms ease-out 100ms forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-200 {
+  animation: fadeUp 600ms ease-out 200ms forwards;
+  opacity: 0;
 }

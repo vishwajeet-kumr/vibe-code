@@ -1,6 +1,6 @@
 // features/generator/generator.service.ts — Calls Gemini Flash, parses response, returns typed PromptKit
 
-import { generateContent } from "@/lib/gemini";
+import { generateContent, generateContentStream } from "@/lib/gemini";
 import { AppError } from "@/lib/errors";
 import { FOUNDATION_SYSTEM_PROMPT } from "@/features/meta-prompt/foundation";
 import { FOLLOWUP_SYSTEM_PROMPT } from "@/features/meta-prompt/followup";
@@ -178,6 +178,17 @@ export async function generatePromptKit(input: ProjectInput): Promise<PromptKit>
 
   const raw = parseJsonResponse(text, "PromptKit");
   return validatePromptKit(raw);
+}
+
+export async function generatePromptKitStream(
+  input: ProjectInput
+): Promise<AsyncGenerator<string, void, unknown>> {
+  const userMessage = buildFoundationUserMessage(input);
+  return generateContentStream({
+    systemPrompt: FOUNDATION_SYSTEM_PROMPT,
+    userPrompt: userMessage,
+    temperature: FOUNDATION_TEMPERATURE,
+  });
 }
 
 export async function generateFollowUpChain(

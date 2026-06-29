@@ -40,8 +40,8 @@ const TECH_STACK_LABELS: Record<(typeof TECH_STACK_OPTIONS)[number], string> = {
 } satisfies Record<(typeof TECH_STACK_OPTIONS)[number], string>;
 
 const fieldClass =
-  "w-full rounded-lg border border-[#E2D9CF] bg-white px-4 py-2.5 text-sm text-[#111111] placeholder-[#6B6457]/50 outline-none transition focus:border-[#8C6A4A] focus:ring-1 focus:ring-[#8C6A4A]/30";
-const labelClass = "mb-1.5 block text-sm font-medium text-[#111111]";
+  "w-full rounded-lg border border-[var(--border)] bg-[var(--bg-card)] px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-[#6B6457]/50 outline-none transition focus:border-[var(--accent)] focus:ring-1 focus:ring-[#8C6A4A]/30";
+const labelClass = "mb-1.5 block text-sm font-medium text-[var(--text-primary)]";
 const errorClass = "mt-1.5 text-xs text-red-600";
 
 export function GeneratorForm({ onSubmit, isLoading }: GeneratorFormProps) {
@@ -127,7 +127,7 @@ export function GeneratorForm({ onSubmit, isLoading }: GeneratorFormProps) {
       <button
         type="submit"
         disabled={isLoading}
-        className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#8C6A4A] py-3 text-sm font-semibold text-white shadow-sm shadow-[#8C6A4A]/20 transition-all duration-150 hover:bg-[#7A5A3C] disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--accent)] py-3 text-sm font-semibold text-white shadow-sm shadow-[var(--accent)]/20 transition-all duration-150 hover:bg-[#7A5A3C] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isLoading ? (
           <>

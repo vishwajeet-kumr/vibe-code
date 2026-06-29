@@ -64,3 +64,32 @@ export async function generateContent(
     );
   }
 }
+
+export async function* generateContentStream(
+  request: GeminiRequest
+): AsyncGenerator<string, void, unknown> {
+  const ai = getClient();
+  try {
+    const responseStream = await ai.models.generateContentStream({
+      model: GEMINI_MODEL,
+      contents: request.userPrompt,
+      config: {
+        systemInstruction: request.systemPrompt,
+        responseMimeType: "application/json",
+        temperature: request.temperature ?? DEFAULT_TEMPERATURE,
+        maxOutputTokens: request.maxOutputTokens ?? MAX_OUTPUT_TOKENS,
+      },
+    });
+
+    for await (const chunk of responseStream) {
+      if (chunk.text) yield chunk.text;
+    }
+  } catch (error: unknown) {
+    if (AppError.isAppError(error)) throw error;
+    const message = error instanceof Error ? error.message : "Unknown Gemini API error";
+    throw AppError.generationFailed(`Gemini API stream call failed: ${message}`, {
+      model: GEMINI_MODEL,
+      promptLength: request.userPrompt.length,
+    });
+  }
+}

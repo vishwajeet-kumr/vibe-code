@@ -25,15 +25,15 @@ export function PricingCard({
 }: PricingCardProps) {
   return (
     <div
-      className={`relative flex flex-col rounded-2xl bg-white p-8 transition-shadow duration-200 ${
+      className={`relative flex flex-col rounded-2xl bg-[var(--bg-card)] p-8 transition-shadow duration-200 ${
         isHighlighted
-          ? "border-2 border-[#8C6A4A] shadow-lg shadow-[#8C6A4A]/10"
-          : "border border-[#E2D9CF] hover:shadow-md hover:shadow-[#8C6A4A]/8"
+          ? "border-2 border-[var(--accent)] shadow-lg shadow-[var(--accent)]/10"
+          : "border border-[var(--border)] hover:shadow-md hover:shadow-[var(--accent)]/8"
       }`}
     >
       {isHighlighted && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-          <span className="inline-flex items-center rounded-full bg-[#8C6A4A] px-4 py-1 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+          <span className="inline-flex items-center rounded-full bg-[var(--accent)] px-4 py-1 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
             Most Popular
           </span>
         </div>
@@ -41,16 +41,16 @@ export function PricingCard({
 
       {/* Plan header */}
       <div className="mb-6">
-        <h3 className="text-base font-semibold text-[#111111]">{name}</h3>
+        <h3 className="text-base font-semibold text-[var(--text-primary)]">{name}</h3>
         <div className="mt-3 flex items-end gap-1.5">
-          <span className="font-serif text-4xl font-normal text-[#111111]">
+          <span className="font-serif text-4xl font-normal text-[var(--text-primary)]">
             {price}
           </span>
           {price !== "Free" && (
-            <span className="mb-1 text-sm text-[#6B6457]">/month</span>
+            <span className="mb-1 text-sm text-[var(--text-muted)]">/month</span>
           )}
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-[#6B6457]">{description}</p>
+        <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{description}</p>
       </div>
 
       {/* Feature list */}
@@ -59,9 +59,9 @@ export function PricingCard({
           <li key={feature} className="flex items-start gap-3">
             <Check
               size={15}
-              className="mt-0.5 shrink-0 text-[#8C6A4A]"
+              className="mt-0.5 shrink-0 text-[var(--accent)]"
             />
-            <span className="text-sm text-[#111111]">{feature}</span>
+            <span className="text-sm text-[var(--text-primary)]">{feature}</span>
           </li>
         ))}
       </ul>
@@ -71,8 +71,8 @@ export function PricingCard({
         onClick={onCtaClick}
         className={`w-full rounded-lg py-2.5 text-sm font-semibold transition-all duration-150 ${
           isHighlighted
-            ? "bg-[#8C6A4A] text-white shadow-sm shadow-[#8C6A4A]/20 hover:bg-[#7A5A3C]"
-            : "border border-[#E2D9CF] text-[#111111] hover:bg-[#EDE5DA]"
+            ? "bg-[var(--accent)] text-white shadow-sm shadow-[var(--accent)]/20 hover:bg-[#7A5A3C]"
+            : "border border-[var(--border)] text-[var(--text-primary)] hover:bg-[var(--accent-light)]"
         }`}
       >
         {ctaLabel}

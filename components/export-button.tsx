@@ -61,7 +61,7 @@ export function ExportButton({ kit, projectName }: ExportButtonProps) {
   return (
     <button
       onClick={handleDownload}
-      className="inline-flex items-center gap-2 rounded-lg border border-[#E2D9CF] bg-white px-3 py-1.5 text-sm font-medium text-[#6B6457] transition-colors hover:bg-[#EDE5DA] hover:text-[#111111]"
+      className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-card)] px-3 py-1.5 text-sm font-medium text-[var(--text-muted)] transition-colors hover:bg-[var(--accent-light)] hover:text-[var(--text-primary)]"
     >
       <Download className="h-4 w-4" />
       Export Markdown
